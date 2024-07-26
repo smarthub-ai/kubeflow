@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dex
+data:
+  config.yaml: |
+    issuer: http://dex.auth.svc.cluster.local:5556/dex
+    storage:
+      type: kubernetes
+      config:
+        inCluster: true
+    web:
+      http: 0.0.0.0:5556
+    logger:
+      level: "debug"
+      format: text
+    oauth2:
+      skipApprovalScreen: true
+    enablePasswordDB: true
+    staticPasswords:
+    - email: faisal@smarthub.ai
+      #hashFromEnv: DEX_USER_PASSWORD
+      ## bcrypt hash of the string "password": $(echo password | htpasswd -BinC 10 admin | cut -d: -f2)
+      hash: $2y$12$K.91VMiu.E.T7AxYzUfWwuAVoIhqJOT.hBNMrEqKSLjNKNLHMPuYC
+      username: faisal
+      userID: "15841185641784"
+    - email: giridhar.kannappan@smarthub.ai
+      #hashFromEnv: DEX_USER_PASSWORD
+      hash: $2y$12$xhNOaOHpx5aZ42IpYQt7uumSlZ0s9PfT2YryeGDi4DuK5n48yHwWu
+      username: giridhar.kannappan
+      userID: "15841185641785"
+    - email: kiran.g@smarthub.ai
+      #hashFromEnv: DEX_USER_PASSWORD
+      # passwd: ESKNML4StEbxQPR7
+      hash: $2y$10$/Ao.a0kMS7qbZasz54UytOr7fnI1d1cIf6/Aqn37YM5g6B1ynKNXK
+      username: kiran.g
+      userID: "15841185641786"
+    - email: amandeep.chugh@smarthub.ai
+      #hashFromEnv: DEX_USER_PASSWORD
+      # passwd: 52QAwigEhdHqp2Pw
+      hash: $2y$10$dLz.haovPEJ741a8yra.F.TYvV4g4mLzAeSXfYQ/yfrA1BNlMArwu
+      username: amandeep.chugh
+      userID: "15841185641787"
+    staticClients:
+    # https://github.com/dexidp/dex/pull/1664
+    - idEnv: OIDC_CLIENT_ID
+      redirectURIs: ["/oauth2/callback"]
+      name: 'Dex Login Application'
+      secretEnv: OIDC_CLIENT_SECRET

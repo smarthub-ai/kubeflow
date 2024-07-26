@@ -1,0 +1,5 @@
+
+controller:
+  enableCustomResources: true
+  enableCertManager: true
+  enableSnippets: true

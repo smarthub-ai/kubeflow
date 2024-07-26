@@ -1,0 +1,18 @@
+sources:
+  - ingress
+provider: cloudflare
+  
+## @param publishInternalServices Allow external-dns to publish DNS records for ClusterIP services
+##
+publishInternalServices: true
+  
+## @param publishHostIP Allow external-dns to publish host-ip for headless services
+##
+#publishHostIP: true
+  
+cloudflare:
+  apiToken: "f-TGJHky1kUOB7O4zOGwKIYB-NLxQtGieFG_zoJ-"
+  email: "faisal@smarthub.ai"
+  proxied: false
+
+logLevel: debug
