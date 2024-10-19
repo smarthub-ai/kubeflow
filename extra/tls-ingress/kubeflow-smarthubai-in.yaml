@@ -1,27 +1,28 @@
-apiVersion: networking.k8s.io/v1 
-kind: Ingress 
-metadata: 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
   name: kubeflow-ingress
   namespace: istio-system
-  annotations: 
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    external-dns.alpha.kubernetes.io/hostname: kubeflow.smarthubai.in
-    external-dns.alpha.kubernetes.io/ttl: "60" #optional
+  annotations:
+    {}
+    #cert-manager.io/cluster-issuer: letsencrypt-prod
+    #external-dns.alpha.kubernetes.io/hostname: kubeflow.smarthubai.in
+    #external-dns.alpha.kubernetes.io/ttl: "60" #optional
     #nginx.org/websocket-services: "kluctl-webui"
-spec: 
-  ingressClassName: nginx
-  tls: 
-  - hosts: 
-    - kubeflow.smarthubai.in
-    secretName: kubeflow-tls
-  rules: 
-  - host: kubeflow.smarthubai.in
-    http: 
-      paths: 
-      - path: / 
-        pathType: Prefix 
-        backend: 
-          service: 
-            name: istio-ingressgateway
-            port: 
-              number: 8080
+spec:
+  ingressClassName: cloudflare-tunnel
+  tls:
+    - hosts:
+        - kubeflow-dev1.smarthubai.in
+      #secretName: kubeflow-tls
+  rules:
+    - host: kubeflow-dev1.smarthubai.in
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: istio-ingressgateway
+                port:
+                  number: 80

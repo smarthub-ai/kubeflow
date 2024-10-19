@@ -1,5 +1,3 @@
-
-
 resources:
-  - smarthubai.in-ca.yaml
-  - kubeflow-smarthubai-in.yaml 
+  #- smarthubai.in-ca.yaml
+  - kubeflow-smarthubai-in.yaml
